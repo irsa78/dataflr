@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Like Post App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<!--boot-->
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--<script src="jquery-3.4.1.min.js"></script>-->
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class = "display-3 color-red"><center>Search Engine<br></center></div>
+    {% for post in posts %}
+        <div class = 'container jumbotron'>
+        <h3 class="display-5">{{ forloop.counter }}. {{ post.post_heading }}</h3>
+        <p class="lead">{{ post.post_text }} </p>
+        <p>
+        <div type="text/css" class = "container">Author : {{ post.post_author }}</div>
+        <a class="likebutton btn btn-primary btn-lg" id="like{{ post.id }}" href="#" data-catid="{{ post.id }}">Like</a> </p> <p id="message{{post.id}}">
+        </p>
+        </div>
+{% endfor %}
+
+<script type="text/javascript">
+$('.likebutton').click(function(){
+var id;
+id = $(this).attr("data-catid");
+$.ajax(
+{
+    type:"GET",
+    url: "like",
+    data:{
+             post_id: id
+},
+success: function( data )
+{
+    $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
+    $( '#like'+ id ).addClass('btn btn-success btn-lg'); } }) });
+
+
+<!--$(function(){-->
+<!--    $('#search').keyup(function(){-->
+<!--     $.ajax({-->
+<!--        type:"POST",-->
+<!--        url: "srche",-->
+<!--        data:{-->
+<!--             post_id: id-->
+<!--},-->
+
+</script>
+</body>
+</html>
